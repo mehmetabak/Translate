@@ -1,2 +1,2 @@
 # Translate
-## A language translator website
+A language translator website
