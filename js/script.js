@@ -54,7 +54,6 @@ fromText.addEventListener("keyup", () => {
     if(!text) return;
     
     lastFrom = fromText.value;
-    copy.style.visibility = "visible";
     toText.setAttribute("placeholder", "Translating...");
     let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
     fetch(apiUrl).then(res => res.json()).then(data => {
@@ -123,7 +122,6 @@ function time(){
             if(!text) return;
     
             lastFrom = fromText.value;
-            copy.style.visibility = "visible";
             toText.setAttribute("placeholder", "Translating...");
             let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
             fetch(apiUrl).then(res => res.json()).then(data => {
