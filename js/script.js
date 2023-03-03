@@ -4,6 +4,8 @@ exchageIcon = document.querySelector(".exchange"),
 selectTag = document.querySelectorAll("select"),
 icons = document.querySelectorAll(".row i");
 copy = document.getElementById("copy");
+var lastFrom ;
+var lastTo ;
 
 selectTag.forEach((tag, id) => {
     for (let country_code in countries) {
@@ -19,11 +21,13 @@ exchageIcon.addEventListener("click", () => {
     toText.value = "";
     selectTag[0].value = selectTag[1].value;
     selectTag[1].value = tempLang;
-
     let text = fromText.value.trim(),
     translateFrom = selectTag[0].value,
     translateTo = selectTag[1].value;
+
     if(!text) return;
+
+    lastFrom = fromText.value;
     toText.setAttribute("placeholder", "Translating...");
     let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
     fetch(apiUrl).then(res => res.json()).then(data => {
@@ -31,6 +35,7 @@ exchageIcon.addEventListener("click", () => {
         data.matches.forEach(data => {
             if(data.id === 0) {
                 toText.value = data.translation;
+                lastTo = toText.value;
                 copy.style.visibility = "visible";
             }
         });
@@ -47,6 +52,8 @@ fromText.addEventListener("keyup", () => {
     translateFrom = selectTag[0].value,
     translateTo = selectTag[1].value;
     if(!text) return;
+    
+    lastFrom = fromText.value;
     copy.style.visibility = "visible";
     toText.setAttribute("placeholder", "Translating...");
     let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
@@ -55,6 +62,7 @@ fromText.addEventListener("keyup", () => {
         data.matches.forEach(data => {
             if(data.id === 0) {
                 toText.value = data.translation;
+                lastTo = toText.value;
                 copy.style.visibility = "visible";
             }
         });
@@ -103,3 +111,32 @@ copy.addEventListener("click", () => {
         message: 'Cleared',
     })
 })
+
+setInterval(time, 500)
+
+function time(){
+    if(fromText.value != "" ){
+        if(lastFrom != fromText.value || lastTo != toText.value){
+            let text = fromText.value.trim(),
+            translateFrom = selectTag[0].value,
+            translateTo = selectTag[1].value;
+            if(!text) return;
+    
+            lastFrom = fromText.value;
+            copy.style.visibility = "visible";
+            toText.setAttribute("placeholder", "Translating...");
+            let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
+            fetch(apiUrl).then(res => res.json()).then(data => {
+                toText.value = data.responseData.translatedText;
+                data.matches.forEach(data => {
+                    if(data.id === 0) {
+                        toText.value = data.translation;
+                        lastTo = toText.value;
+                        copy.style.visibility = "visible";
+                    }
+                });
+                toText.setAttribute("placeholder", "Translation");
+            });
+        }
+    }
+}
