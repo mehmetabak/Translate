@@ -14,4 +14,4 @@ You can try with this [**link**][1] .
 
 
 
-[1]:  "https://memoli0.github.io/Translate/"
+[1]:  https://memoli0.github.io/Translate/
