@@ -12,7 +12,6 @@ body{
   justify-content: center;
   padding: 0 10px;
   min-height: 100vh;
-  min-width: 100vh;
   background-image: linear-gradient(#ff8a00, #e52e71);
   opacity: 0.86;
 }
