@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "Language Translator",
+    "description": "A simple and open source language translator extension.",
+    "version": "1.0",
+    "action": {
+        "default_popup": "index.html"
+    },
+    "icons": {
+        "16": "favicon.ico",
+        "32": "favicon.ico",
+        "48": "favicon.ico",
+        "128": "favicon.ico"
+    }
+}

@@ -5,7 +5,6 @@ selectTag = document.querySelectorAll("select"),
 icons = document.querySelectorAll(".row i");
 copy = document.getElementById("copy");
 
-
 selectTag.forEach((tag, id) => {
     for (let country_code in countries) {
         let selected = id == 0 ? country_code == "en-GB" ? "selected" : "" : country_code == "tr-TR" ? "selected" : "";
@@ -63,8 +62,6 @@ fromText.addEventListener("keyup", () => {
     });
     }
 });
-
-
 
 icons.forEach(icon => {
     icon.addEventListener("click", ({target}) => {
