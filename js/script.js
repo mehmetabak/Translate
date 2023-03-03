@@ -138,3 +138,10 @@ function time(){
         }
     }
 }
+
+function changed(){
+    jSuites.notification({
+        name: 'Information',
+        message: 'Language changed',
+    })
+}
