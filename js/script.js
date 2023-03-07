@@ -6,6 +6,7 @@ icons = document.querySelectorAll(".row i");
 copy = document.getElementById("copy");
 var lastFrom ;
 var lastTo ;
+let check = true;
 
 selectTag.forEach((tag, id) => {
     for (let country_code in countries) {
@@ -38,6 +39,7 @@ exchageIcon.addEventListener("click", () => {
                 toText.value = data.translation;
                 lastTo = toText.value;
                 copy.style.visibility = "visible";
+                check = true;
             }
         });
         toText.setAttribute("placeholder", "Translation");
@@ -64,6 +66,7 @@ fromText.addEventListener("keyup", () => {
                 toText.value = data.translation;
                 lastTo = toText.value;
                 copy.style.visibility = "visible";
+                check = true;
             }
         });
         toText.setAttribute("placeholder", "Translation");
@@ -112,31 +115,33 @@ copy.addEventListener("click", () => {
     })
 })
 
-setInterval(time, 500)
+setInterval(time, 800)
 
 function time(){
-    if(fromText.value != "" ){
-        if(lastFrom != fromText.value || lastTo != toText.value){
-            let text = fromText.value.trim(),
-            translateFrom = selectTag[0].value,
-            translateTo = selectTag[1].value;
-            if(!text) return;
+    if(fromText.value != "" && check){
+        
+        let text = fromText.value.trim(),
+        translateFrom = selectTag[0].value,
+        translateTo = selectTag[1].value;
+        if(!text) return;
     
-            lastFrom = fromText.value;
-            toText.setAttribute("placeholder", "Translating...");
-            let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
-            fetch(apiUrl).then(res => res.json()).then(data => {
-                toText.value = data.responseData.translatedText;
-                data.matches.forEach(data => {
-                    if(data.id === 0) {
-                        toText.value = data.translation;
-                        lastTo = toText.value;
-                        copy.style.visibility = "visible";
-                    }
-                });
-                toText.setAttribute("placeholder", "Translation");
+        lastFrom = fromText.value;
+        toText.setAttribute("placeholder", "Translating...");
+        let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
+        fetch(apiUrl).then(res => res.json()).then(data => {
+            toText.value = data.responseData.translatedText;
+            data.matches.forEach(data => {
+                if(data.id === 0) {
+                    toText.value = data.translation;
+                    lastTo = toText.value;
+                    copy.style.visibility = "visible";
+                    check = false;
+                    console.log("false is created");
+                }
             });
-        }
+            toText.setAttribute("placeholder", "Translation");
+        });
+        
     }
 }
 
@@ -162,6 +167,7 @@ function changed(){
                 toText.value = data.translation;
                 lastTo = toText.value;
                 copy.style.visibility = "visible";
+                check = true;
             }
         });
         toText.setAttribute("placeholder", "Translation");
