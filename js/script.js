@@ -21,6 +21,7 @@ exchageIcon.addEventListener("click", () => {
     toText.value = "";
     selectTag[0].value = selectTag[1].value;
     selectTag[1].value = tempLang;
+
     let text = fromText.value.trim(),
     translateFrom = selectTag[0].value,
     translateTo = selectTag[1].value;
@@ -144,4 +145,25 @@ function changed(){
         name: 'Information',
         message: 'Language changed',
     })
+    toText.value = "";
+    let text = fromText.value.trim(),
+    translateFrom = selectTag[0].value,
+    translateTo = selectTag[1].value;
+
+    if(!text) return;
+
+    lastFrom = fromText.value;
+    toText.setAttribute("placeholder", "Translating...");
+    let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
+    fetch(apiUrl).then(res => res.json()).then(data => {
+        toText.value = data.responseData.translatedText;
+        data.matches.forEach(data => {
+            if(data.id === 0) {
+                toText.value = data.translation;
+                lastTo = toText.value;
+                copy.style.visibility = "visible";
+            }
+        });
+        toText.setAttribute("placeholder", "Translation");
+    });
 }
