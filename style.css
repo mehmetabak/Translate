@@ -1,8 +1,5 @@
 /* Import Google Font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-.html{
-  filter: invert(1);
-}
 *{
   margin: 0;
   padding: 0;
@@ -16,6 +13,9 @@ body{
   padding: 0 10px;
   min-height: 100vh;
   background-image: linear-gradient(#ff8a00, #e52e71); opacity: 0.86;;
+}
+.html{
+  filter: invert(1);
 }
 .container{
   max-width: 690px;
