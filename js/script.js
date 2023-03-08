@@ -1,12 +1,21 @@
 const fromText = document.querySelector(".from-text"),
 toText = document.querySelector(".to-text"),
 exchageIcon = document.querySelector(".exchange"),
+html = document.querySelector(".html"),
 selectTag = document.querySelectorAll("select"),
 icons = document.querySelectorAll(".row i");
 copy = document.getElementById("copy");
 var lastFrom ;
 var lastTo ;
 let check = true;
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+if (prefersDarkScheme.matches) {
+    html.style.filter = 'invert(1)';
+}else{
+    html.style.filter = 'invert(0)';
+}
+
 
 selectTag.forEach((tag, id) => {
     for (let country_code in countries) {
@@ -173,3 +182,4 @@ function changed(){
         toText.setAttribute("placeholder", "Translation");
     });
 }
+
