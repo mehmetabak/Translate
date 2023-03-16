@@ -124,7 +124,7 @@ copy.addEventListener("click", () => {
     })
 })
 
-setInterval(time, 800)
+setInterval(time, 600)
 
 function time(){
     if(fromText.value != "" && check){
